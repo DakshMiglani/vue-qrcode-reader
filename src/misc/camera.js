@@ -36,21 +36,6 @@ const narrowDownFacingMode = async camera => {
     ({ kind }) => kind === "videoinput"
   );
 
-  if (devices.length > 2) {
-    const frontCamera = devices[0];
-    const rearCamera = devices[devices.length - 1];
-
-    switch (camera) {
-      case "auto":
-        return { deviceId: { exact: rearCamera.deviceId } };
-      case "rear":
-        return { deviceId: { exact: rearCamera.deviceId } };
-      case "front":
-        return { deviceId: { exact: frontCamera.deviceId } };
-      default:
-        return undefined;
-    }
-  } else {
     switch (camera) {
       case "auto":
         return { facingMode: { ideal: "environment" } };
@@ -61,7 +46,6 @@ const narrowDownFacingMode = async camera => {
       default:
         return undefined;
     }
-  }
 };
 
 export default async function(videoEl, { camera, torch }) {
